@@ -60,6 +60,7 @@ export default class SearchScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.titleConnections}>Connections</Text>
                 <Text style={styles.formLabel}>From:</Text>
                 <TextInput
                     style={styles.textInput}
@@ -88,6 +89,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
+    },
+    titleConnections: {
+        textAlign: 'left',
+        alignSelf: 'flex-start',
+        fontSize: 32,
+        paddingBottom: 18,
     },
     textInput: {
         height: 40,
