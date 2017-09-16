@@ -8,13 +8,13 @@ export default class Diamond extends React.Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={[styles.pointIcon, { backgroundColor: Data.CapacityToColor(this.props.capacity)}]}>
+            <View style={[styles.container, this.props.style]}>
+                <View style={[styles.pointIcon, { backgroundColor: this.props.peakPoints ? "#27AE60" : Data.CapacityToColor(this.props.capacity)}]}>
                     <Image source={ require('../img/diamond.png') }/>
                 </View>
                 <View style={styles.pointDisplay}>
                     <Text style={styles.pointLabel}>POINTS</Text>
-                    <Text style={styles.pointText}>{Data.CapacityToPoints(this.props.capacity)}</Text>
+                    <Text style={styles.pointText}>{this.props.peakPoints ? this.props.peakPoints : Data.CapacityToPoints(this.props.capacity)}</Text>
                 </View>
             </View>
         );
