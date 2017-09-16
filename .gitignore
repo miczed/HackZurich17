@@ -4,3 +4,5 @@ npm-debug.*
 ios/build
 .idea
 .idea/
+.tmp
+.tmp/

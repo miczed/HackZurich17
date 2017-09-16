@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import Button from 'apsl-react-native-button'
-
+import NotificationsIOS from 'react-native-notifications';
 
 export default class SearchScreen extends React.Component {
     _onPressButton = () => {
@@ -19,14 +19,34 @@ export default class SearchScreen extends React.Component {
         });
     }
 
+    _triggerNotif = () => {
+
+        let localNotification = NotificationsIOS.localNotification({
+            alertBody: "Local notificiation!",
+            alertTitle: "Local Notification Title",
+            silent: false,
+            userInfo: { type: 'checkin' }
+        });
+        console.log(localNotification);
+    };
+
     render() {
         return (
             <View style={styles.container}>
-                <Text>Search Screen Baby!!!</Text>
-                <Text>Changes you make will automatically reload.</Text>
-                <Text>Shake your phone to open the developer menu.</Text>
-                <Button onPress={this._onPressButton} style={{backgroundColor: 'red'}} textStyle={{fontSize: 18}}>
-                    Show me your genitals
+                <Text style={styles.formLabel}>From:</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Zurich HB"
+                    onChangeText={(from) => this.setState({from})}
+                />
+                <Text style={styles.formLabel}>To:</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Bern"
+                    onChangeText={(to) => this.setState({to})}
+                />
+                <Button onPress={this._triggerNotif} style={styles.submitButton} textStyle={{fontSize: 18}}>
+                    GO
                 </Button>
             </View>
         );
@@ -36,8 +56,30 @@ export default class SearchScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#F9F9FB',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 20,
     },
+    textInput: {
+        height: 40,
+        padding: 10,
+        alignSelf: 'stretch',
+        borderRadius: 8,
+        backgroundColor: '#fff',
+    },
+    formLabel: {
+        textAlign: 'left',
+        alignSelf: 'stretch',
+        paddingBottom: 10,
+        paddingTop: 10,
+    },
+    submitButton: {
+        borderRadius: 8,
+        marginTop: 20,
+        backgroundColor: '#BAE1CB',
+        borderWidth: 0,
+    },
+    submitButtonText: {
+    }
 });

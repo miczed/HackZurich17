@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTPushNotificationManager.h>
+#import "RNNotifications.h"
 
 // **********************************************
 // *** DON'T MISS: THE NEXT LINE IS IMPORTANT ***
@@ -31,21 +33,33 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
   
-  /*
-   // original RN bootstrap - remove this part
-   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-   moduleName:@"example"
-   initialProperties:nil
-   launchOptions:launchOptions];
-   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-   UIViewController *rootViewController = [UIViewController new];
-   rootViewController.view = rootView;
-   self.window.rootViewController = rootViewController;
-   [self.window makeKeyAndVisible];
-   */
-  
-  
+
   return YES;
+}
+// Required to register for notifications
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+  [RNNotifications didRegisterUserNotificationSettings:notificationSettings];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+  [RNNotifications didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+  [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
+}
+
+// Required for the notification event.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+  [RNNotifications didReceiveRemoteNotification:notification];
+}
+
+// Required for the localNotification event.
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+  [RNNotifications didReceiveLocalNotification:notification];
 }
 
 @end
