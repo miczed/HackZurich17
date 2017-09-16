@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, Image} from 'react-native';
 import moment from 'moment';
+import Data from '../lib/data';
 
 import ConnectionCard from "../components/ConnectionCard";
 
@@ -23,6 +24,7 @@ export default class ConnectionsScreen extends React.Component {
                 <ScrollView style={styles.scrollView}>
                     { this.props.data.connections.map(this.displayConnection) }
                 </ScrollView>
+                {Data.generatePoints(this.props.data.connections)}
             </View>
         );
     }
