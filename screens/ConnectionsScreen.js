@@ -1,16 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView,View } from 'react-native';
+import moment from 'moment';
 
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
         super();
     }
     displayConnection(connection) {
+        let duration = connection.duration.substring(3);
+        console.log(duration);
         return (
             <View style={styles.card}>
-                <Text>Departure: { connection.from.departure }</Text>
-                <Text>Arrival: { connection.to.arrival }</Text>
-                <Text>Duration: { connection.duration }</Text>
+                <Text>Departure: { moment(connection.from.departure).format("HH:mm") }</Text>
+                <Text>Arrival: { moment(connection.to.arrival).format("HH:mm") }</Text>
+                <Text>Duration: { moment(connection.duration.substring(3),"HH:mm:ss").format("HH:mm") }</Text>
             </View>
         )
     }
