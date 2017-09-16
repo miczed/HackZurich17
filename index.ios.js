@@ -8,7 +8,19 @@ import NotificationsIOS from 'react-native-notifications';
 NotificationsIOS.addEventListener('remoteNotificationsRegistered', onPushRegistered);
 NotificationsIOS.addEventListener('remoteNotificationsRegistrationFailed', onPushRegistrationFailed);
 NotificationsIOS.addEventListener('notificationReceivedForeground',onPushFiredForeground);
+
+// Ask for permissions
 NotificationsIOS.requestPermissions();
+navigator.geolocation.requestAuthorization();
+navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+
+function onGeoSuccess(data) {
+    console.log(data);
+}
+
+function onGeoError(data) {
+    console.error(data);
+}
 
 function onPushFiredForeground(stuff) {
     console.log(stuff);
