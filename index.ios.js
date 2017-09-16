@@ -51,19 +51,19 @@ Navigation.startTabBasedApp({
             title: 'Connections'
         },
         {
-            label: 'Points',
-            screen: 'peakpass.PointsScreen',
-            icon: require('./img/trophy-alt.png'),
-            selectedIcon: require('./img/trophy-alt.png'), // iOS only
-            title: 'Points'
-        },
-        {
             label: 'Rewards',
             screen: 'peakpass.RewardsScreen',
+            icon: require('./img/trophy-alt.png'),
+            selectedIcon: require('./img/trophy-alt.png'), // iOS only
+            title: 'Rewards'
+        },
+        {
+            label: 'Store',
+            screen: 'peakpass.PointsScreen',
             icon: require('./img/shopping-bag.png'),
             selectedIcon: require('./img/shopping-bag.png'), // iOS only
-            title: 'Rewards'
-        }
+            title: 'Store'
+        },
     ],
     tabsStyle: {
         tabBarLabelColor: '#ACACAC',
