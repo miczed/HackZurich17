@@ -5,6 +5,7 @@ import PointsScreen from './PointsScreen';
 import RewardsScreen from './RewardsScreen';
 import OnboardingScreen from './OnboardingScreen';
 import ConnectionsScreen from './ConnectionsScreen';
+import QRScreen from './QRScreen';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -13,4 +14,5 @@ export function registerScreens() {
     Navigation.registerComponent('peakpass.RewardsScreen', () => RewardsScreen);
     Navigation.registerComponent('peakpass.OnboardingScreen', () => OnboardingScreen);
     Navigation.registerComponent('peakpass.ConnectionsScreen', () => ConnectionsScreen);
+    Navigation.registerComponent('peakpass.QRScreen', () => QRScreen);
 }

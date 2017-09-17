@@ -19,6 +19,7 @@ export default class PointsScreen extends React.Component {
     componentWillMount(){
         this.addMockRewardsData();
         this.getPeakPointsFromLocalStorage();
+        AsyncStorage.setItem("peakPoints", "5000" );
     }
 
     getPeakPointsFromLocalStorage() {
@@ -50,10 +51,16 @@ export default class PointsScreen extends React.Component {
             // Save new value in Async Storage and update state
             AsyncStorage.setItem("peakPoints", (this.state.currentPeakPoints - peakPoints).toString() );
             this.setState({currentPeakPoints: this.state.currentPeakPoints - peakPoints});
-
+            this.props.navigator.showModal({
+                screen: "peakpass.QRScreen", // unique ID registered with Navigation.registerScreen
+                title: "20% Discount", // title of the screen as appears in the nav bar (optional)
+                passProps: {}, // simple serializable object that will pass as props to the modal (optional)
+                navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+                animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+            });
         }
         else {
-            Alert.alert('Not possible, sorry!');
+            Alert.alert('😢 Not enough PeakPoints 😢',"You need " + (peakPoints - this.state.currentPeakPoints) + " more PeakPoints to get this reward. Why don\'t you catch the next train and collect some points?");
         }
     }
 
