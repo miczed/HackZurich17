@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
 import Data from '../lib/data';
+var normalize = require('normalize-number');
 
 export default class Diamond extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export default class Diamond extends React.Component {
     render() {
         return (
             <View style={[styles.container, this.props.style]}>
-                <View style={[styles.pointIcon, { backgroundColor: this.props.peakPoints !== undefined ? "#27AE60" : Data.CapacityToColor(this.props.capacity)}]}>
+                <View style={[styles.pointIcon, { backgroundColor:  this.props.peakPoints === 0 ? '#EB5757' : "#27AE60"}]}>
+                    {this.props.capacity === 0 && (<View style={[styles.shadeOfGrey,{backgroundColor: '#BDBDBD',opacity: 1-normalize([0, 250], this.props.peakPoints)}]} />) }
                     <Image source={ require('../img/diamond.png') }/>
                 </View>
                 <View style={styles.pointDisplay}>
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         padding: 6,
         marginRight: 10,
+        overflow: 'hidden'
     },
     pointLabel: {
         fontWeight: 'bold',
@@ -46,4 +49,9 @@ const styles = StyleSheet.create({
     pointDisplay: {
         flexDirection: 'column',
     },
+    shadeOfGrey: {
+        position: 'absolute',
+        width: 100,
+        height: 100,
+    }
 });

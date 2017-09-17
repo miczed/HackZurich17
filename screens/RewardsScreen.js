@@ -70,7 +70,7 @@ export default class RewardsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F9F9FB',
+        backgroundColor: '#F8F6F6',
         alignItems: 'flex-start',
         justifyContent: 'center',
     },
