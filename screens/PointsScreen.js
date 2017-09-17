@@ -31,8 +31,8 @@ export default class PointsScreen extends React.Component {
 
     addMockRewardsData(){
 
-        const product1 = { description: "Get a 20% discount for your next purchase in any ShopVille Migros.", peakPoints: 2500, image: require('../img/migros.png'), id: 1};
-        const product2 = { description: "Get a coupon for a free delicious coffee at your next kkiosk.", peakPoints: 1500, image: require('../img/kkiosk.png'), id: 2};
+        const product1 = { description: "Get a 20% discount for your next purchase in any ShopVille Migros.", peakPoints: 1500, image: require('../img/migros.png'), id: 1};
+        const product2 = { description: "Get a coupon for a free delicious coffee at your next kkiosk.", peakPoints: 500, image: require('../img/kkiosk.png'), id: 2, bought: true};
 
         let data = [];
         data.push(product1);
@@ -57,6 +57,18 @@ export default class PointsScreen extends React.Component {
         }
     }
 
+    storeButton(item){
+        if (item.bought) {
+            return <Button style={styles.boughtButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.viewProduct(item.id)} >Show Coupon</Button>
+        }
+        else if (this.state.currentPeakPoints - item.peakPoints >= 0){
+            return <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Buy now for " + item.peakPoints + " PeakPoints"}</Button>
+        }
+        else {
+            return <Button style={styles.buyButton, styles.buyButtonLocked} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"Buy now for " + item.peakPoints + " PeakPoints (Locked)"}</Button>
+        }
+    }
+
     renderItem({ item, index }) {
         return (
             <View style={[styles.product, styles.card]}>
@@ -65,10 +77,7 @@ export default class PointsScreen extends React.Component {
 
                 <Text style={styles.productDescription}>{item.description}</Text>
 
-                { (this.state.currentPeakPoints - item.peakPoints >= 0) ?
-                    <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Buy now for " + item.peakPoints + " PeakPoints"}</Button> :
-                    <Button style={styles.buyButton, styles.buyButtonLocked} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"Buy now for " + item.peakPoints + " PeakPoints (Locked)"}</Button>
-                }
+                {this.storeButton(item)}
 
             </View>
         );
@@ -159,6 +168,12 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         alignSelf: 'stretch',
+    },
+
+    boughtButton: {
+        backgroundColor: '#e9f7ef',
+        borderWidth: 0,
+        fontWeight: '500'
     },
 
     buyButton: {
