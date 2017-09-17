@@ -74,7 +74,7 @@ export default class SearchScreen extends React.Component {
                     onChangeText={(to) => this.setState({to})}
                 />
                 <Button isLoading={this.state.loading} isDisabled={!this.state.from || !this.state.to} onPress={this._onPressButton} style={styles.submitButton} textStyle={{fontSize: 18}}>
-                    GO
+                    Go
                 </Button>
                 <Image source={require('../img/brands.png')} style={styles.brands} />
             </View>
@@ -94,7 +94,9 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         alignSelf: 'flex-start',
         fontSize: 32,
-        paddingBottom: 18,
+        paddingTop: 32,
+        paddingBottom: 16,
+        fontWeight: "500"
     },
     textInput: {
         height: 40,
@@ -106,6 +108,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 3},
         shadowOpacity: 0.05,
         shadowRadius: 15,
+        borderWidth: 1,
+        borderColor: "#d7d7d7"
     },
     formLabel: {
         textAlign: 'left',
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         borderRadius: 8,
-        marginTop: 20,
+        marginTop: 25,
         backgroundColor: '#BAE1CB',
         borderWidth: 0,
     },
@@ -125,6 +129,7 @@ const styles = StyleSheet.create({
     brands: {
         alignSelf: 'flex-start',
         marginTop: 'auto',
+        marginBottom: 10
     }
 
 });
