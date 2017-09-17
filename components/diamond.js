@@ -14,7 +14,7 @@ export default class Diamond extends React.Component {
                 </View>
                 <View style={styles.pointDisplay}>
                     <Text style={styles.pointLabel}>POINTS</Text>
-                    <Text style={styles.pointText}>{this.props.peakPoints ? this.props.peakPoints : Data.CapacityToPoints(this.props.capacity)}</Text>
+                    <Text style={styles.pointText}>{this.props.peakPoints}</Text>
                 </View>
             </View>
         );

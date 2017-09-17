@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, Image} from 'react-native';
 import moment from 'moment';
+import Data from '../lib/data';
 
 import ConnectionCard from "../components/ConnectionCard";
 
@@ -8,10 +9,17 @@ import ConnectionCard from "../components/ConnectionCard";
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
         super();
+        this.state = {pointsArr: []};
+        this.displayConnection = this.displayConnection.bind(this);
     }
+
+    componentWillMount(){
+        this.setState({pointsArr: Data.generatePoints(this.props.data.connections)})
+    }
+
     displayConnection(connection, key) {
         return (
-            <ConnectionCard connection={connection} key={key}/>
+            <ConnectionCard connection={connection} key={key} peakPoints={this.state.pointsArr[key]}/>
         )
     }
     render() {
