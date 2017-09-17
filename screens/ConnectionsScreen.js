@@ -9,17 +9,29 @@ import ConnectionCard from "../components/ConnectionCard";
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
         super();
-        this.state = {pointsArr: []};
+        this.state = {pointsArr: [], capacityArr: []};
         this.displayConnection = this.displayConnection.bind(this);
+    }
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
     componentWillMount(){
-        this.setState({pointsArr: Data.generatePoints(this.props.data.connections)})
+        let capArr = [];
+        this.props.data.connections.map(() => {
+            capArr.push(this.getRandomInt(0,3));
+        });
+        this.setState({
+            pointsArr: Data.generatePoints(this.props.data.connections,capArr),
+            capacityArr: capArr,
+        });
     }
 
     displayConnection(connection, key) {
         return (
-            <ConnectionCard connection={connection} key={key} peakPoints={this.state.pointsArr[key]}/>
+            <ConnectionCard connection={connection} key={key} peakPoints={this.state.pointsArr[key]} capacity={this.state.capacityArr[key]}/>
         )
     }
     render() {
