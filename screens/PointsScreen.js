@@ -77,6 +77,10 @@ export default class PointsScreen extends React.Component {
 
                 <Text style={styles.productDescription}>{item.description}</Text>
 
+                { (this.state.currentPeakPoints - item.peakPoints >= 0) ?
+                    <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Buy now for " + item.peakPoints + " PeakPoints"}</Button> :
+                    <Button style={[styles.buyButton, styles.buyButtonLocked]} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"Buy now for " + item.peakPoints + " PeakPoints (Locked)"}</Button>
+                }
                 {this.storeButton(item)}
 
             </View>
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#F9F9FB',
+        backgroundColor: '#F8F6F6',
         alignItems: 'flex-start',
         justifyContent: 'center',
     },

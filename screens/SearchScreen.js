@@ -47,7 +47,6 @@ export default class SearchScreen extends React.Component {
     }
 
     _triggerNotif = () => {
-
         let localNotification = NotificationsIOS.localNotification({
             alertBody: "Local notificiation!",
             alertTitle: "Local Notification Title",
@@ -85,7 +84,7 @@ export default class SearchScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F9F9FB',
+        backgroundColor: '#F8F6F6',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,

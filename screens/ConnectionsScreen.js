@@ -2,24 +2,37 @@ import React from 'react';
 import { StyleSheet, Text, ScrollView, View, Image} from 'react-native';
 import moment from 'moment';
 import Data from '../lib/data';
-
 import ConnectionCard from "../components/ConnectionCard";
-
+import * as Animatable from 'react-native-animatable';
 
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
         super();
-        this.state = {pointsArr: []};
+        this.state = {pointsArr: [], capacityArr: []};
         this.displayConnection = this.displayConnection.bind(this);
+    }
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
     componentWillMount(){
-        this.setState({pointsArr: Data.generatePoints(this.props.data.connections)})
+        let capArr = [];
+        this.props.data.connections.map(() => {
+            capArr.push(this.getRandomInt(0,3));
+        });
+        this.setState({
+            pointsArr: Data.generatePoints(this.props.data.connections,capArr),
+            capacityArr: capArr,
+        });
     }
 
     displayConnection(connection, key) {
         return (
-            <ConnectionCard connection={connection} key={key} peakPoints={this.state.pointsArr[key]}/>
+            <Animatable.View key={key} animation="fadeInUp" delay={(key+4)*100} duration={300}>
+                <ConnectionCard connection={connection} peakPoints={this.state.pointsArr[key]} capacity={this.state.capacityArr[key]}/>
+            </Animatable.View>
         )
     }
     render() {
@@ -46,7 +59,7 @@ export default class ConnectionsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F9F9FB',
+        backgroundColor: '#F8F6F6',
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 20,
@@ -69,5 +82,8 @@ const styles = StyleSheet.create({
     scrollView: {
         alignSelf: 'stretch',
     },
+    bold: {
+        fontWeight: 'bold',
+    }
 });
 

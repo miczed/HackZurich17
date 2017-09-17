@@ -11,7 +11,6 @@ export default class ConnectionCard extends React.Component {
     constructor(props) {
         super();
         this.state =  {
-            capacity : Math.floor(Math.random() * 3),
             expanded    : false,
             checkingIn : false,
             checkedIn : false,
@@ -90,11 +89,11 @@ export default class ConnectionCard extends React.Component {
                 <View >
                     <View style={styles.cardRow}>
                         <Text style={styles.trainText}>{ productname }</Text>
-                        <Text style={[styles.capacityText ,{ color: Data.CapacityToColor(this.state.capacity)}]}>{ Data.CapacityToText(this.state.capacity) }</Text>
+                        <Text style={[styles.capacityText ,{ color: Data.CapacityToColor(this.props.capacity)}]}>{ Data.CapacityToText(this.props.capacity) }</Text>
                         <Text style={styles.platformText}>Pl. { this.props.connection.from.platform }</Text>
                     </View>
                     <View style={[styles.cardRow, { marginBottom: 0 }]}>
-                        <Diamond capacity={this.state.capacity} />
+                        <Diamond capacity={this.props.capacity} peakPoints={this.props.peakPoints}/>
                         <View style={styles.timetable}>
                             <Text style={styles.timeText}>{ moment(this.props.connection.from.departure).format("HH:mm") }</Text>
                             <View style={styles.durationSpacer} />
