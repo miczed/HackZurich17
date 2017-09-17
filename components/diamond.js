@@ -9,12 +9,12 @@ export default class Diamond extends React.Component {
     render() {
         return (
             <View style={[styles.container, this.props.style]}>
-                <View style={[styles.pointIcon, { backgroundColor: this.props.peakPoints ? "#27AE60" : Data.CapacityToColor(this.props.capacity)}]}>
+                <View style={[styles.pointIcon, { backgroundColor: this.props.peakPoints !== undefined ? "#27AE60" : Data.CapacityToColor(this.props.capacity)}]}>
                     <Image source={ require('../img/diamond.png') }/>
                 </View>
                 <View style={styles.pointDisplay}>
                     <Text style={styles.pointLabel}>POINTS</Text>
-                    <Text style={styles.pointText}>{this.props.peakPoints ? this.props.peakPoints : Data.CapacityToPoints(this.props.capacity)}</Text>
+                    <Text style={styles.pointText}>{this.props.peakPoints !== undefined ? this.props.peakPoints.toString() : Data.CapacityToPoints(this.props.capacity)}</Text>
                 </View>
             </View>
         );
@@ -22,7 +22,8 @@ export default class Diamond extends React.Component {
 }
 
 Diamond.propTypes = {
-    capacity: PropTypes.number
+    capacity: PropTypes.number,
+    peakPoints: PropTypes.number
 };
 
 const styles = StyleSheet.create({

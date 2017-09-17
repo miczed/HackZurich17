@@ -2,6 +2,8 @@ import { Navigation } from 'react-native-navigation';
 
 import { registerScreens } from './screens';
 
+import Diamond from "./components/diamond";
+
 import NotificationsIOS from 'react-native-notifications';
 
 
