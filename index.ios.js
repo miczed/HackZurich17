@@ -44,14 +44,14 @@ Navigation.startTabBasedApp({
             screen: 'peakpass.SearchScreen', // this is a registered name for a screen
             icon: require('./img/exchange.png'),
             selectedIcon: require('./img/exchange.png'), // iOS only
-            title: 'Connections'
+            title: 'PeakPass'
         },
         {
-            label: 'Rewards',
+            label: 'Achievements',
             screen: 'peakpass.RewardsScreen',
             icon: require('./img/trophy-alt.png'),
             selectedIcon: require('./img/trophy-alt.png'), // iOS only
-            title: 'Rewards'
+            title: 'Achievements'
         },
         {
             label: 'Store',
