@@ -17,3 +17,9 @@ You can build the project by running the following commands:
 * **Michael Ziörjen** – [miczed](https://github.com/miczed)
 * **Pascal Emmenegger** – [pemmenegger](https://github.com/pemmenegger)
 * **Martin Bucher** - [mnbucher](https://github.com/mnbucher)
+
+## Figma Doc
+
+Check out our Figma doc for User Interface, Branding and Design work:
+
+https://www.figma.com/file/Txy2CmYrqZaEvEqTEZ0O5C6v/PeakPass
