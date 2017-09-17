@@ -12,15 +12,9 @@ NotificationsIOS.addEventListener('notificationReceivedForeground',onPushFiredFo
 // Ask for permissions
 NotificationsIOS.requestPermissions();
 navigator.geolocation.requestAuthorization();
-navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-
-function onGeoSuccess(data) {
+navigator.geolocation.watchPosition((data) => {
     console.log(data);
-}
-
-function onGeoError(data) {
-    console.error(data);
-}
+});
 
 function onPushFiredForeground(stuff) {
     console.log(stuff);
