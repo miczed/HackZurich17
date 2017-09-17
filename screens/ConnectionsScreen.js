@@ -30,7 +30,7 @@ export default class ConnectionsScreen extends React.Component {
 
     displayConnection(connection, key) {
         return (
-            <Animatable.View key={key} animation="fadeInUp" delay={(key+4)*100}>
+            <Animatable.View key={key} animation="fadeInUp" delay={(key+4)*100} duration={300}>
                 <ConnectionCard connection={connection} peakPoints={this.state.pointsArr[key]} capacity={this.state.capacityArr[key]}/>
             </Animatable.View>
         )
