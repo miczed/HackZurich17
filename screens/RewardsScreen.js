@@ -35,7 +35,7 @@ export default class RewardsScreen extends React.Component {
 
     renderItem({ item, index }) {
         return (
-            <View style={[styles.reward, styles.card]}>
+            <View style={[styles.reward, styles.card,index === 2 && {opacity: 0.3 }]}>
 
                 <Image source={item.image} style={styles.rewardImage} />
 

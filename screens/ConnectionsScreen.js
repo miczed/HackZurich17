@@ -5,10 +5,12 @@ import Data from '../lib/data';
 import ConnectionCard from "../components/ConnectionCard";
 import * as Animatable from 'react-native-animatable';
 
+import {mockConnection} from '../lib/mock';
+
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
         super();
-        this.state = {pointsArr: [], capacityArr: []};
+        this.state = {pointsArr: [], capacityArr: [], connections: []};
         this.displayConnection = this.displayConnection.bind(this);
     }
     getRandomInt(min, max) {
@@ -19,12 +21,16 @@ export default class ConnectionsScreen extends React.Component {
 
     componentWillMount(){
         let capArr = [];
-        this.props.data.connections.map(() => {
+        let connections = JSON.parse(JSON.stringify(this.props.data.connections));
+        connections.push(mockConnection);
+        connections.map(() => {
             capArr.push(this.getRandomInt(0,3));
         });
+
         this.setState({
-            pointsArr: Data.generatePoints(this.props.data.connections,capArr),
+            pointsArr: Data.generatePoints(connections,capArr),
             capacityArr: capArr,
+            connections: connections,
         });
     }
 
@@ -36,7 +42,7 @@ export default class ConnectionsScreen extends React.Component {
         )
     }
     render() {
-        let fromname,toname
+        let fromname,toname;
         if(this.props.data.from.name) {
             fromname = this.props.data.from.name;
         }
@@ -49,7 +55,7 @@ export default class ConnectionsScreen extends React.Component {
                 <Text style={styles.heading}>To <Text style={styles.bold}>{ toname }</Text></Text>
                 <Text style={styles.subheading}>{moment().format("dddd, MMMM Do YYYY, H:mm ")}</Text>
                 <ScrollView style={styles.scrollView}>
-                    { this.props.data.connections.map(this.displayConnection) }
+                    { this.state.connections && this.state.connections.map(this.displayConnection) }
                 </ScrollView>
             </View>
         );

@@ -74,7 +74,7 @@ export default class PointsScreen extends React.Component {
             return <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Get this reward for " + item.peakPoints + " PeakPoints"}</Button>
         }
         else {
-            return <Button style={styles.buyButton, styles.buyButtonLocked} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"You need " + (item.peakPoints - this.state.currentPeakPoints) + " more PeakPoints to get this reward."}</Button>
+            return <Button style={[styles.buyButton, styles.buyButtonLocked]} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"You need " + (item.peakPoints - this.state.currentPeakPoints) + " more PeakPoints to get this reward."}</Button>
         }
     }
 

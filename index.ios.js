@@ -16,11 +16,11 @@ NotificationsIOS.addEventListener('notificationReceivedForeground',onPushFiredFo
 NotificationsIOS.requestPermissions();
 navigator.geolocation.requestAuthorization();
 navigator.geolocation.watchPosition((data) => {
-    console.log(data);
+
 });
 
 function onPushFiredForeground(stuff) {
-    console.log(stuff);
+
 }
 
 function onPushRegistered(deviceToken) {

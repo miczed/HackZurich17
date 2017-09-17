@@ -103,9 +103,12 @@ export default class ConnectionCard extends React.Component {
                         </View>
                     </View>
                     <Collapsible collapsed={!this.state.expanded}>
-                        <Button isLoading={this.state.checkingIn} style={styles.checkinButton} textStyle={{fontSize: 12, color: '#95663D'}} onPress={this.checkIn.bind(this)}>
-                            Check In
-                        </Button>
+                        { this.state.checkedIn ? (<Button isDisabled={true} style={styles.checkinButton} textStyle={{fontSize: 12, color: '#95663D'}} >
+                            Already checked in ✔
+                        </Button>) :(<Button isLoading={this.state.checkingIn} style={styles.checkinButton} textStyle={{fontSize: 12, color: '#95663D'}} onPress={this.checkIn.bind(this)}>
+                             Check In
+                        </Button>)}
+
                     </Collapsible>
                 </View>
             </TouchableHighlight>
