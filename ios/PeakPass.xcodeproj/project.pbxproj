@@ -37,6 +37,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		D76315561F6D2F1D00FD8143 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D76315551F6D2EEC00FD8143 /* libReactNativeNavigation.a */; };
 		D76315731F6D6ACC00FD8143 /* libRNNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D76315721F6D6AC300FD8143 /* libRNNotifications.a */; };
+		D7DBEDCC1F6E2ADF009B9D63 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7DBEDCB1F6E2ADF009B9D63 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +315,7 @@
 		D763152B1F6D2EEC00FD8143 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		D76315591F6D67A200FD8143 /* PeakPass.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PeakPass.entitlements; path = PeakPass/PeakPass.entitlements; sourceTree = "<group>"; };
 		D763156D1F6D6AC300FD8143 /* RNNotifications.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNNotifications.xcodeproj; path = "../node_modules/react-native-notifications/RNNotifications/RNNotifications.xcodeproj"; sourceTree = "<group>"; };
+		D7DBEDCB1F6E2ADF009B9D63 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,6 +532,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D7DBEDCB1F6E2ADF009B9D63 /* Launch Screen.storyboard */,
 				13B07FAE1A68108700A75B9A /* PeakPass */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* PeakPassTests */,
@@ -982,6 +985,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7DBEDCC1F6E2ADF009B9D63 /* Launch Screen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1152,7 +1156,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.tinystudio.peakpass;
 				PRODUCT_NAME = PeakPass;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1176,7 +1182,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.tinystudio.peakpass;
 				PRODUCT_NAME = PeakPass;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
