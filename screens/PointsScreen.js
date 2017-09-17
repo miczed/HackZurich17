@@ -44,35 +44,37 @@ export default class PointsScreen extends React.Component {
         });
 
     }
-
+    showCoupon() {
+        this.props.navigator.showModal({
+            screen: "peakpass.QRScreen", // unique ID registered with Navigation.registerScreen
+            title: "20% Discount", // title of the screen as appears in the nav bar (optional)
+            passProps: {}, // simple serializable object that will pass as props to the modal (optional)
+            navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+            animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+        });
+    }
     buyProduct(id, peakPoints){
         if(this.state.currentPeakPoints >= peakPoints){
 
             // Save new value in Async Storage and update state
             AsyncStorage.setItem("peakPoints", (this.state.currentPeakPoints - peakPoints).toString() );
             this.setState({currentPeakPoints: this.state.currentPeakPoints - peakPoints});
-            this.props.navigator.showModal({
-                screen: "peakpass.QRScreen", // unique ID registered with Navigation.registerScreen
-                title: "20% Discount", // title of the screen as appears in the nav bar (optional)
-                passProps: {}, // simple serializable object that will pass as props to the modal (optional)
-                navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-                animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
-            });
+            this.showCoupon();
         }
         else {
-            Alert.alert('😢 Not enough PeakPoints 😢',"You need " + (peakPoints - this.state.currentPeakPoints) + " more PeakPoints to get this reward. Why don\'t you catch the next train and collect some points?");
+            Alert.alert('Not enough PeakPoints 😢',"You need " + (peakPoints - this.state.currentPeakPoints) + " more PeakPoints to get this reward. Why don\'t you catch the next train and collect some points?");
         }
     }
 
     storeButton(item){
         if (item.bought) {
-            return <Button style={styles.boughtButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.viewProduct(item.id)} >Show Coupon</Button>
+            return <Button style={styles.boughtButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.showCoupon() } >Display Coupon</Button>
         }
         else if (this.state.currentPeakPoints - item.peakPoints >= 0){
-            return <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Buy now for " + item.peakPoints + " PeakPoints"}</Button>
+            return <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Get this reward for " + item.peakPoints + " PeakPoints"}</Button>
         }
         else {
-            return <Button style={styles.buyButton, styles.buyButtonLocked} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"Buy now for " + item.peakPoints + " PeakPoints (Locked)"}</Button>
+            return <Button style={styles.buyButton, styles.buyButtonLocked} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"You need " + (item.peakPoints - this.state.currentPeakPoints) + " more PeakPoints to get this reward."}</Button>
         }
     }
 
@@ -84,10 +86,6 @@ export default class PointsScreen extends React.Component {
 
                 <Text style={styles.productDescription}>{item.description}</Text>
 
-                { (this.state.currentPeakPoints - item.peakPoints >= 0) ?
-                    <Button style={styles.buyButton} textStyle={{fontSize: 12, color: '#503E0D',}} onPress={() => this.buyProduct(item.id, item.peakPoints)} >{"Buy now for " + item.peakPoints + " PeakPoints"}</Button> :
-                    <Button style={[styles.buyButton, styles.buyButtonLocked]} textStyle={{fontSize: 12, color: '#828282'}} isDisabled={true} >{"Buy now for " + item.peakPoints + " PeakPoints (Locked)"}</Button>
-                }
                 {this.storeButton(item)}
 
             </View>
@@ -184,7 +182,6 @@ const styles = StyleSheet.create({
     boughtButton: {
         backgroundColor: '#e9f7ef',
         borderWidth: 0,
-        fontWeight: '500'
     },
 
     buyButton: {

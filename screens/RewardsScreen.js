@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     rewardImage: {
         height: 40,
         width: 40,
-        marginRight: 20
+        marginRight: 10
     },
 
     rewardDescription: {

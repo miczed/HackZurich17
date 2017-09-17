@@ -62,10 +62,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8F6F6',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 20,
+
         paddingVertical: 15,
     },
     heading: {
+        paddingHorizontal: 20,
         fontSize: 18,
         textAlign: 'left',
         alignSelf: 'flex-start',
@@ -78,9 +79,11 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginBottom: 10,
         marginTop: 5,
+        paddingHorizontal: 20,
     },
     scrollView: {
         alignSelf: 'stretch',
+        paddingHorizontal: 20,
     },
     bold: {
         fontWeight: 'bold',
