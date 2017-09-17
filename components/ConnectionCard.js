@@ -32,7 +32,7 @@ export default class ConnectionCard extends React.Component {
                                 <Text style={styles.platformText}>Pl. { this.props.connection.from.platform }</Text>
                             </View>
                             <View style={[styles.cardRow, { marginBottom: 0 }]}>
-                                <Diamond capacity={this.state.capacity} />
+                                <Diamond capacity={this.state.capacity} peakPoints={this.props.peakPoints} />
                                 <View style={styles.timetable}>
                                     <Text style={styles.timeText}>{ moment(this.props.connection.from.departure).format("HH:mm") }</Text>
                                     <View style={styles.durationSpacer} />

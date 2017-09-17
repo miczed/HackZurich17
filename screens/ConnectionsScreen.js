@@ -9,10 +9,17 @@ import ConnectionCard from "../components/ConnectionCard";
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
         super();
+        this.state = {pointsArr: []};
+        this.displayConnection = this.displayConnection.bind(this);
     }
+
+    componentWillMount(){
+        this.setState({pointsArr: Data.generatePoints(this.props.data.connections)})
+    }
+
     displayConnection(connection, key) {
         return (
-            <ConnectionCard connection={connection} key={key}/>
+            <ConnectionCard connection={connection} key={key} peakPoints={this.state.pointsArr[key]}/>
         )
     }
     render() {
@@ -24,7 +31,6 @@ export default class ConnectionsScreen extends React.Component {
                 <ScrollView style={styles.scrollView}>
                     { this.props.data.connections.map(this.displayConnection) }
                 </ScrollView>
-                {Data.generatePoints(this.props.data.connections)}
             </View>
         );
     }
