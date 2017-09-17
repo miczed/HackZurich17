@@ -2,9 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, ScrollView, View, Image} from 'react-native';
 import moment from 'moment';
 import Data from '../lib/data';
-
 import ConnectionCard from "../components/ConnectionCard";
-
+import * as Animatable from 'react-native-animatable';
 
 export default class ConnectionsScreen extends React.Component {
     constructor(props) {
@@ -31,7 +30,9 @@ export default class ConnectionsScreen extends React.Component {
 
     displayConnection(connection, key) {
         return (
-            <ConnectionCard connection={connection} key={key} peakPoints={this.state.pointsArr[key]} capacity={this.state.capacityArr[key]}/>
+            <Animatable.View key={key} animation="fadeInUp" delay={(key+4)*100}>
+                <ConnectionCard connection={connection} peakPoints={this.state.pointsArr[key]} capacity={this.state.capacityArr[key]}/>
+            </Animatable.View>
         )
     }
     render() {
