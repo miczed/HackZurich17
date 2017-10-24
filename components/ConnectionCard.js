@@ -36,45 +36,53 @@ export default class ConnectionCard extends React.Component {
         let threshold_min = departure_time - 5 * 60;
         let threshold_max = departure_time + (60 * 5);
         console.log(now,threshold_max);
-        if( !this.didTrainLeave() ) { // did the train leave already?
-            if(now > threshold_min ) { // are we close to departure?
-                Geo.getUserLocation((data) => {
-                    if(Geo.isCloseToPlace(data.coords.latitude,data.coords.longitude,this.props.connection.from.location.coordinate.x,this.props.connection.from.location.coordinate.y)) {
-                        this.setState({
-                            checkedIn: true,
-                            checkingIn: false,
-                        });
-                        AlertIOS.alert("🎉 Check-in Succesful 🎉","You've earned +50 Points");
-                    } else {
+        if(this.props.connection.alwaysPossible) {
+            this.setState({
+                checkedIn: true,
+                checkingIn: false,
+            });
+            AlertIOS.alert("🎉 Check-in Succesful 🎉","You've earned +50 Points");
+        } else {
+            if (!this.didTrainLeave()) { // did the train leave already?
+                if (now > threshold_min) { // are we close to departure?
+                    Geo.getUserLocation((data) => {
+                        if (Geo.isCloseToPlace(data.coords.latitude, data.coords.longitude, this.props.connection.from.location.coordinate.x, this.props.connection.from.location.coordinate.y)) {
+                            this.setState({
+                                checkedIn: true,
+                                checkingIn: false,
+                            });
+                            AlertIOS.alert("🎉 Check-in Succesful 🎉", "You've earned +50 Points");
+                        } else {
+                            this.setState({
+                                checkedIn: false,
+                                checkingIn: false,
+                            });
+                            AlertIOS.alert("Check-in Failed", "You have to be at the trainstation / in the train to check in.");
+                        }
+                    }, (error) => {
                         this.setState({
                             checkedIn: false,
                             checkingIn: false,
                         });
-                        AlertIOS.alert("Check-in Failed",  "You have to be at the trainstation / in the train to check in.");
-                    }
-                },(error) => {
+                        AlertIOS.alert("Check-in Failed", "Couldn't get your current location. Please make sure that you set the permissions");
+
+                    });
+                } else {
                     this.setState({
                         checkedIn: false,
                         checkingIn: false,
                     });
-                    AlertIOS.alert("Check-in Failed",  "Couldn't get your current location. Please make sure that you set the permissions");
+                    AlertIOS.alert("Check-in Failed", "You cannot check-in more than 5 minutes before the departure of the train.");
 
-                });
+                    // TODO: create push notif when train leaves
+                }
             } else {
                 this.setState({
-                    checkedIn: false,
                     checkingIn: false,
+                    checkedIn: false,
                 });
-                AlertIOS.alert("Check-in Failed",  "You cannot check-in more than 5 minutes before the departure of the train.");
-
-                // TODO: create push notif when train leaves
+                AlertIOS.alert("Check-in Failed", "This train has already left. You cannot check-in to it.");
             }
-        } else {
-            this.setState({
-                checkingIn: false,
-                checkedIn: false,
-            });
-            AlertIOS.alert("Check-in Failed", "This train has already left. You cannot check-in to it.");
         }
     }
     render() {
